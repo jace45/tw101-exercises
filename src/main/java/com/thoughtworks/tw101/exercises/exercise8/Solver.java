@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Solver {
     private GuessChecker guessChecker;
     private Scanner scanner;
-    private ArrayList<Integer> guesses = new ArrayList<Integer>();
+    private ArrayList<Integer> guesses = new ArrayList<>();
+    private int guess;
+
 
     public Solver(GuessChecker guessChecker, Scanner scanner){
         this.guessChecker = guessChecker;
@@ -17,20 +19,16 @@ public class Solver {
     }
 
     public void findSolution(){
-        int guess = enterValidNumberString(scanner);
-
-        guesses.add(guess);
-        guessChecker.tooHighOrTooLow(guess);
-
         while (!guessChecker.isGuessRight()){
-            if (guessChecker.isNumberTooHigh()) {
-                System.out.println("Your guess is too High");
-            } else {
-                System.out.println("Your guess is too low");
-            }
             guess = enterValidNumberString(scanner);
             guesses.add(guess);
             guessChecker.tooHighOrTooLow(guess);
+
+            if (guessChecker.isNumberTooHigh() && !guessChecker.isGuessRight()) {
+                System.out.println("Your guess is too High");
+            } else if (!guessChecker.isGuessRight()) {
+                System.out.println("Your guess is too low");
+            }
         }
     }
 

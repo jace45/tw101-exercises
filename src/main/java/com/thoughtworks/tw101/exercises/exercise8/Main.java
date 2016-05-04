@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-        int start = 0, end = 20;
+        int start = 0, end = 100;
 
         Random random = new Random();
         RandomGenerator randomGenerator = new RandomGenerator(start, end, random);
