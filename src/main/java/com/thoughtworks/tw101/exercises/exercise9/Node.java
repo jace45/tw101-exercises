@@ -6,7 +6,7 @@ import java.util.List;
 public class Node {
     private String name;
     private Node left, right;
-    private static List<String> listOfNames = new LinkedList<>();
+    private List<String> listOfNames = new LinkedList<>();
 
     public Node(String name) {
 
@@ -30,19 +30,14 @@ public class Node {
     }
 
     public List<String> names() {
-        if (left == null){
-            listOfNames.add(name);
-            if (right != null)
-                right.names();
-        } else {
-            try {
-                left.names();
-                listOfNames.add(name);
-                right.names();
-            } catch (NullPointerException e){
-                return listOfNames;
-            }
+        if (left != null) {
+            listOfNames.addAll(left.names());
         }
+        listOfNames.add(name);
+        if (right != null) {
+            listOfNames.addAll(right.names());
+        }
+
         return listOfNames;
     }
 }
